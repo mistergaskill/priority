@@ -1,2 +1,13 @@
-<h1>Welcome to SvelteKit</h1>
-<p>Visit <a href="https://svelte.dev/docs/kit">svelte.dev/docs/kit</a> to read the documentation</p>
+<script lang="ts">
+	import { goto } from '$app/navigation';
+	import { generateId } from '$lib/id';
+
+	function findPriority() {
+		goto(`/${generateId()}/list`);
+	}
+</script>
+
+<main>
+	<h1>Priority</h1>
+	<button onclick={findPriority}>Find Your Priority</button>
+</main>
