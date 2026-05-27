@@ -1,5 +1,8 @@
 node_modules
 
+# Generated
+worker-configuration.d.ts
+
 # Output
 .output
 .vercel
