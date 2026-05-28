@@ -1,3 +1,17 @@
 @import 'tailwindcss';
 @plugin '@tailwindcss/forms';
 @plugin '@tailwindcss/typography';
+
+@theme {
+	--color-background: #01161E;
+	--color-primary-font: #EFF6E0;
+	--color-primary-button: #598392;
+	--color-accent-1: #124559;
+	--color-accent-2: #AEC3B0;
+}
+
+@layer base {
+	body {
+		@apply bg-background text-primary-font;
+	}
+}
