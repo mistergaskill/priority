@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { resolve } from '$app/paths';
-	import { generateId } from '$lib/id';
+	import { generateId } from '$lib/helpers/id';
 	import Button from '$lib/components/Button.svelte';
 
 	function createList() {
