@@ -1,17 +1,34 @@
 <script lang="ts">
+	import { untrack } from 'svelte';
 	import Input from '$lib/components/Input.svelte';
 	import Button from '$lib/components/Button.svelte';
 	import TaskList from '$lib/components/TaskList.svelte';
-	import { createTask, type Task } from '$lib/types';
+	import { createTask, serializeTask, type Task } from '$lib/types';
 
-	let tasks = $state<Task[]>([]);
+	let { data } = $props();
+
+	let tasks = $state<Task[]>(untrack(() => data.tasks));
 	let text = $state('');
 
 	function addTask() {
 		const trimmed = text.trim();
 		if (!trimmed) return;
-		tasks = [...tasks, createTask(trimmed)];
+		const task = createTask(trimmed, data.listId);
+		tasks = [...tasks, task];
 		text = '';
+		persistTask(task);
+	}
+
+	async function persistTask(task: Task) {
+		try {
+			await fetch('/api/tasks', {
+				method: 'POST',
+				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify(serializeTask(task))
+			});
+		} catch (e) {
+			console.error(e);
+		}
 	}
 </script>
 

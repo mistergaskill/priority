@@ -16,6 +16,7 @@
 		"test": "npm run test:unit -- --run && npm run test:e2e",
 		"test:e2e": "playwright install && playwright test",
 		"gen": "wrangler types",
+		"db:clear:local": "wrangler d1 execute priority --local --command \"DELETE FROM tasks; DELETE FROM lists;\"",
 		"db:push": "drizzle-kit push",
 		"db:generate": "drizzle-kit generate",
 		"db:migrate": "drizzle-kit migrate",

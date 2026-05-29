@@ -1,12 +1,12 @@
 import { expect, test } from '@playwright/test';
 
 test('gather phase has correct header', async ({ page }) => {
-	await page.goto('/test-id/list');
+	await page.goto(`/${crypto.randomUUID()}/list`);
 	await expect(page.getByRole('heading', { name: 'Gather' })).toBeVisible();
 });
 
-test('can add an item and see it in the list', async ({ page }) => {
-	await page.goto('/test-id/list');
+test('can add a task and see it in the list', async ({ page }) => {
+	await page.goto(`/${crypto.randomUUID()}/list`);
 
 	await page.getByRole('textbox').fill('Buy oat milk');
 	await page.getByRole('button', { name: 'Capture' }).click();
@@ -18,7 +18,7 @@ test('can add an item and see it in the list', async ({ page }) => {
 });
 
 test('clears the input after adding a task', async ({ page }) => {
-	await page.goto('/test-id/list');
+	await page.goto(`/${crypto.randomUUID()}/list`);
 
 	await page.getByRole('textbox').fill('Buy oat milk');
 	await page.getByRole('button', { name: 'Capture' }).click();
@@ -27,7 +27,7 @@ test('clears the input after adding a task', async ({ page }) => {
 });
 
 test('preserves insertion order when multiple tasks are added', async ({ page }) => {
-	await page.goto('/test-id/list');
+	await page.goto(`/${crypto.randomUUID()}/list`);
 
 	const tasks = ['First thing', 'Second thing', 'Third thing'];
 

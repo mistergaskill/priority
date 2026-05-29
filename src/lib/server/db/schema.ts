@@ -1,9 +1,15 @@
-import { integer, sqliteTable, text } from 'drizzle-orm/sqlite-core';
+import { sqliteTable, text } from 'drizzle-orm/sqlite-core';
 
-export const task = sqliteTable('task', {
-	id: text('id')
-		.primaryKey()
-		.$defaultFn(() => crypto.randomUUID()),
-	title: text('title').notNull(),
-	priority: integer('priority').notNull().default(1)
+export const lists = sqliteTable('lists', {
+	id: text('id').primaryKey(),
+	createdAt: text('created_at').notNull()
+});
+
+export const tasks = sqliteTable('tasks', {
+	id: text('id').primaryKey(),
+	listId: text('list_id')
+		.notNull()
+		.references(() => lists.id),
+	text: text('text').notNull(),
+	createdAt: text('created_at').notNull()
 });
